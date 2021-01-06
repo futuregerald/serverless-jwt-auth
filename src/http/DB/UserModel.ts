@@ -1,9 +1,15 @@
-const mongoose = require('mongoose');
+import mongoose, { Schema, Document } from 'mongoose';
+
 const argon2 = require('argon2');
 
-const { Schema } = mongoose;
+export interface IUser extends Document {
+  email: string;
+  password: string;
+  appMetadata: any;
+  userMetadata: any;
+}
 
-const UserSchema = new Schema(
+const UserSchema = new Schema<IUser>(
   {
     email: {
       type: String,
@@ -14,25 +20,31 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    app_metadata: {
-      type: String,
+    appMetadata: {
+      type: Object,
+    },
+    userMetadata: {
+      type: Object,
     },
   },
   { timestamps: { createdAt: 'updatedAt', updatedAt: 'updatedAt' } }
 );
 
-UserSchema.pre('save', async function(next) {
+UserSchema.pre<IUser>('save', async function(next) {
   const user = this;
+  if (!this.isModified('password')) {
+    return next();
+  }
   let hash;
+
   try {
     hash = await argon2.hash(user.password, { type: argon2.argon2id });
   } catch (err) {
     console.log(err);
-    user.password = 'unset';
+    user.password = '';
   }
 
-  user.password = hash;
-  console.log('the user is', user);
+  this.password = hash;
   next();
 });
 
@@ -48,6 +60,5 @@ UserSchema.methods.isValidPassword = async function(password) {
   }
 };
 
-const UserModel = mongoose.model('User', UserSchema);
-
-module.exports = UserModel;
+const UserModel = mongoose.model<IUser>('User', UserSchema);
+export default UserModel;

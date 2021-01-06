@@ -1,9 +1,9 @@
-const User = require('../DB/UserModel');
+import UserModel from '../DB/UserModel';
 
-const signupEmailPassword = async ({ email, password }) => {
+export const signupEmailPassword = async ({ email, password }) => {
   console.log(email, password, 'that was it');
   try {
-    const user = await User.create({ email, password });
+    const user = await UserModel.create({ email, password });
 
     return user;
   } catch (error) {
@@ -12,9 +12,9 @@ const signupEmailPassword = async ({ email, password }) => {
   }
 };
 
-const loginEmailPassword = async (email, password) => {
+export const loginEmailPassword = async (email, password) => {
   try {
-    const user = await User.findOne({ email });
+    const user = await UserModel.findOne({ email });
 
     if (!user) {
       return { message: 'User not found' };
@@ -31,6 +31,3 @@ const loginEmailPassword = async (email, password) => {
     return { message: 'Error finding user', error };
   }
 };
-
-exports.loginEmailPassword = loginEmailPassword;
-exports.signupEmailPassword = signupEmailPassword;
