@@ -1,14 +1,26 @@
 import UserModel from '../DB/UserModel';
 
-export const signupEmailPassword = async ({ email, password }) => {
-  console.log(email, password, 'that was it');
+interface signupEmailPasswordFunc {
+  email: string;
+  password: string;
+}
+
+export const signupEmailPassword = async ({
+  email,
+  password,
+}: signupEmailPasswordFunc) => {
   try {
     const user = await UserModel.create({ email, password });
-
-    return user;
+    return {
+      user,
+      error: null,
+    };
   } catch (error) {
     console.log(error);
-    return error;
+    return {
+      user: null,
+      error,
+    };
   }
 };
 
