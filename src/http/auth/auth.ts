@@ -1,4 +1,5 @@
 import UserModel from '../DB/UserModel';
+import { generateUserJWT } from './jwt';
 
 interface signupEmailPasswordFunc {
   email: string;
@@ -10,9 +11,19 @@ export const signupEmailPassword = async ({
   password,
 }: signupEmailPasswordFunc) => {
   try {
+    const signingSecret = process.env.SIGNING_SECRET;
+    if (!signingSecret) {
+      return {
+        user: null,
+        jwt: null,
+        error: new Error('JWT Signing Secret Not Found'),
+      };
+    }
     const user = await UserModel.create({ email, password });
+    const { password: _, ...userObj } = user.toObject();
     return {
       user,
+      jwt: generateUserJWT(signingSecret, userObj),
       error: null,
     };
   } catch (error) {

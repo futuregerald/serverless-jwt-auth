@@ -3,10 +3,13 @@ import mongoose, { Schema, Document } from 'mongoose';
 const argon2 = require('argon2');
 
 export interface IUser extends Document {
+  _id: string;
   email: string;
-  password: string;
-  appMetadata: any;
-  userMetadata: any;
+  password?: string;
+  appMetadata?: any;
+  userMetadata?: any;
+  roles?: [string];
+  exp?: number;
 }
 
 const UserSchema = new Schema<IUser>(
@@ -25,6 +28,9 @@ const UserSchema = new Schema<IUser>(
     },
     userMetadata: {
       type: Object,
+    },
+    roles: {
+      type: Array,
     },
   },
   { timestamps: { createdAt: 'updatedAt', updatedAt: 'updatedAt' } }
