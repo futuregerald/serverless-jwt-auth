@@ -5,6 +5,7 @@ const argon2 = require('argon2');
 export interface IRefreshToken extends Document {
   _id: string;
   token: string;
+  group: string;
   createdAt?: string;
   updatedAt?: any;
 }
@@ -18,6 +19,7 @@ const RefreshTokenSchema = new Schema<IRefreshToken>(
     },
     group: {
       type: String,
+      default: 'global',
     },
     createdAt: { type: Date, expires: '30d', default: Date.now },
   },
@@ -37,8 +39,8 @@ RefreshTokenSchema.methods.isValidPassword = async function(password) {
   }
 };
 
-const RefreshTokenModelModel = mongoose.model<IRefreshToken>(
-  'User',
+const RefreshTokenModel = mongoose.model<IRefreshToken>(
+  'RefreshToken',
   RefreshTokenSchema
 );
-export default RefreshTokenModelModel;
+export default RefreshTokenModel;

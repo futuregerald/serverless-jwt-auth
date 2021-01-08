@@ -1,5 +1,5 @@
 import UserModel from '../DB/UserModel';
-import { generateUserJWT, generateRefreshJWT } from './jwt';
+import { generateUserJWT, generateAndSaveRefreshToken } from './jwt';
 import { signupEmailPasswordFunc, signupReturn } from './types';
 
 const signingSecret = process.env.SIGNING_SECRET;
@@ -17,7 +17,7 @@ export const signupEmailPassword = async ({
     return {
       user,
       jwt: generateUserJWT(signingSecret, userObj),
-      refreshToken: await generateRefreshJWT(signingSecret, userObj),
+      refreshToken: await generateAndSaveRefreshToken(signingSecret, userObj),
     };
   } catch (error) {
     console.log(error);
