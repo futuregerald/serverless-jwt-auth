@@ -33,7 +33,7 @@ const UserSchema = new Schema<IUser>(
       type: Array,
     },
   },
-  { timestamps: { createdAt: 'updatedAt', updatedAt: 'updatedAt' } }
+  { timestamps: true }
 );
 
 UserSchema.pre<IUser>('save', async function(next) {
