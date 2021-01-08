@@ -6,3 +6,29 @@ export interface generateJWTOptions {
   roles?: string[];
   exp?: number;
 }
+
+export interface generateRefreshJWTOptions {
+  _id: string;
+  exp?: number;
+}
+
+export interface expiryDateOptions {
+  years?: number;
+  months?: number;
+  weeks?: number;
+  days?: number;
+  hours?: number;
+  minutes?: number;
+  seconds?: number;
+}
+
+export interface signupEmailPasswordFunc {
+  email: string;
+  password: string;
+}
+
+export interface signupReturn {
+  user: any;
+  jwt: string;
+  refreshToken: string;
+}
