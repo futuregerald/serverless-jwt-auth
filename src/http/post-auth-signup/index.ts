@@ -11,6 +11,7 @@ exports.handler = async function http(req) {
   try {
     const body = JSON.parse(req.body);
     const results = await signupEmailPassword(body);
+    results.
     return {
       statusCode: 200,
       headers,

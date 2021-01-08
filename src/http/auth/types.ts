@@ -21,3 +21,14 @@ export interface expiryDateOptions {
   minutes?: number;
   seconds?: number;
 }
+
+export interface signupEmailPasswordFunc {
+  email: string;
+  password: string;
+}
+
+export interface signupReturn {
+  user: any;
+  jwt: string;
+  refreshToken: string;
+}

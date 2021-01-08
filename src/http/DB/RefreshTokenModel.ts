@@ -16,6 +16,9 @@ const RefreshTokenSchema = new Schema<IRefreshToken>(
       required: true,
       unique: true,
     },
+    group: {
+      type: String,
+    },
     createdAt: { type: Date, expires: '30d', default: Date.now },
   },
   { timestamps: true }

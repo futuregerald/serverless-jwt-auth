@@ -5,6 +5,7 @@ import {
   generateRefreshJWTOptions,
   expiryDateOptions,
 } from './types';
+import RefreshTokenSchema from '../DB/RefreshTokenSchema';
 
 // const getExpDate = () => Math.floor(Date.now() / 1000) + 60 * 60;
 const getExpDate = (options?: expiryDateOptions) => {
@@ -50,3 +51,16 @@ export const generateRefreshJWT = (
     },
     signingSecret
   );
+
+export const generateAndSaveRefreshToken = async (
+  signingSecret: string,
+  options: generateRefreshJWTOptions
+): Promise<string> => {
+  try {
+    const token = generateRefreshJWT(signingSecret, options);
+    await RefreshTokenSchema.create({ token });
+    return token;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
