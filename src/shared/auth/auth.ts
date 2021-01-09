@@ -4,7 +4,7 @@ import {
   signupEmailPasswordFunc,
   signupReturn,
   generateJWTOptions,
-} from './types';
+} from '../types';
 
 const signingSecret = process.env.SIGNING_SECRET;
 
@@ -27,14 +27,15 @@ export const signupEmailPassword = async ({
       roles: userObj.roles,
     };
 
-    const { password: _, ...cleanUser } = user;
+    const { password: _, ...cleanUser } = userObj;
 
     return {
       user: cleanUser,
       jwt: generateUserJWT(signingSecret, userJwtOptions),
       refreshToken: await generateAndSaveRefreshToken(
         signingSecret,
-        userJwtOptions
+        userJwtOptions,
+        user
       ),
     };
   } catch (error) {

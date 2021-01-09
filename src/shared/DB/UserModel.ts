@@ -1,15 +1,6 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import argon2 from 'argon2';
-
-export interface IUser extends Document {
-  email?: string;
-  password?: string;
-  appMetadata?: any;
-  userMetadata?: any;
-  roles?: [string];
-  exp?: number;
-  isValidPassword?: (string) => Promise<boolean>;
-}
+import { IUser } from '../types';
 
 const UserSchema = new Schema<IUser>(
   {
