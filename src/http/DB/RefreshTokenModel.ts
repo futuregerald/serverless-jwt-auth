@@ -27,18 +27,6 @@ const RefreshTokenSchema = new Schema<IRefreshToken>(
 );
 RefreshTokenSchema.index({ createdAt: 1 }, { expireAfterSeconds: '1m' });
 
-RefreshTokenSchema.methods.isValidPassword = async function(password) {
-  try {
-    const user = this;
-    const compare = await argon2.verify(user.password, password);
-
-    return compare;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
-};
-
 const RefreshTokenModel = mongoose.model<IRefreshToken>(
   'RefreshToken',
   RefreshTokenSchema

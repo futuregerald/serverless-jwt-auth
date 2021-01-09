@@ -10,6 +10,7 @@ export interface IUser extends Document {
   userMetadata?: any;
   roles?: [string];
   exp?: number;
+  isValidPassword?: (string) => Promise<boolean>;
 }
 
 const UserSchema = new Schema<IUser>(
@@ -54,7 +55,9 @@ UserSchema.pre<IUser>('save', async function(next) {
   next();
 });
 
-UserSchema.methods.isValidPassword = async function(password) {
+UserSchema.methods.isValidPassword = async function(
+  password: string
+): Promise<boolean> {
   try {
     const user = this;
     const compare = await argon2.verify(user.password, password);
