@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 require('@architect/shared/DB/dbConnection');
 
 const { signupEmailPassword } = require('@architect/shared/auth/auth');
