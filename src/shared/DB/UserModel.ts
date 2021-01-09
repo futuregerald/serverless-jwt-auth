@@ -59,7 +59,6 @@ UserSchema.methods.isValidPassword = async function(
   try {
     const user = this;
     const compare = await argon2.verify(user.password, password);
-
     return compare;
   } catch (error) {
     console.log(error);
