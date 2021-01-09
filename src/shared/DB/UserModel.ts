@@ -1,6 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-
-const argon2 = require('argon2');
+import argon2 from 'argon2';
 
 export interface IUser extends Document {
   email?: string;

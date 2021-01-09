@@ -1,6 +1,6 @@
-require('../DB/dbConnection');
+require('@architect/shared/DB/dbConnection');
 
-const { signupEmailPassword } = require('../auth/auth');
+const { signupEmailPassword } = require('@architect/shared/auth/auth');
 
 const headers = {
   'cache-control': 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
