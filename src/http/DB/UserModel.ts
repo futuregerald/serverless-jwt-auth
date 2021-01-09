@@ -3,8 +3,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 const argon2 = require('argon2');
 
 export interface IUser extends Document {
-  _id: string;
-  email: string;
+  _id?: string;
+  email?: string;
   password?: string;
   appMetadata?: any;
   userMetadata?: any;

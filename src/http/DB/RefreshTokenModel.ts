@@ -1,7 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-const argon2 = require('argon2');
-
 export interface IRefreshToken extends Document {
   _id: string;
   token: string;
