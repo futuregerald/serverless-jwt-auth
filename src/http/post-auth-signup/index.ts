@@ -15,7 +15,7 @@ const schema = {
   type: 'object',
   properties: {
     email: { type: 'string', format: 'email' },
-    password: { type: 'string' },
+    password: { type: 'string', minLength: 8 },
     userMetadata: { type: 'object' },
     appMetadata: { type: 'object' },
     roles: { type: 'array' },
@@ -44,7 +44,6 @@ exports.handler = async function http(req) {
       body: JSON.stringify(results),
     };
   } catch (error) {
-    console.log('this is the val error', error.toString());
     return {
       statusCode: 500,
       headers,
