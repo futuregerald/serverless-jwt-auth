@@ -1,3 +1,4 @@
+import { userSerializer } from '../serializers/user';
 import UserModel from '../DB/UserModel';
 import { generateUserJWT, generateAndSaveRefreshToken } from './jwt';
 import {
@@ -17,7 +18,7 @@ export const signupEmailPassword = async ({
       throw new Error('JWT Signing Secret Not Found');
     }
     const user = await UserModel.create({ email, password });
-    const userObj = user.toObject();
+    const userObj = user;
 
     const userJwtOptions: generateJWTOptions = {
       _id: userObj._id,
@@ -27,10 +28,8 @@ export const signupEmailPassword = async ({
       roles: userObj.roles,
     };
 
-    const { password: _, ...cleanUser } = userObj;
-
     return {
-      user: cleanUser,
+      user: userSerializer(userObj),
       jwt: generateUserJWT(signingSecret, userJwtOptions),
       refreshToken: await generateAndSaveRefreshToken(
         signingSecret,

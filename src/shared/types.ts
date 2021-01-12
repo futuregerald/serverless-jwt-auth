@@ -36,6 +36,7 @@ export interface signupReturn {
 }
 
 export interface IUser extends Document {
+  _id?: any;
   email?: string;
   password?: string;
   appMetadata?: any;
