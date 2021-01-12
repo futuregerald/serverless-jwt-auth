@@ -23,7 +23,6 @@ const schema = {
   required: ['email', 'password'],
   additionalProperties: false,
 };
-v.addSchema(schema);
 
 exports.handler = async function http(req) {
   try {
@@ -34,6 +33,9 @@ exports.handler = async function http(req) {
       allowUnknownAttributes: false,
     });
     console.log(validationResults);
+    if (validationResults.errors.length > 0) {
+      throw new Error(validationResults.errors);
+    }
 
     const results = await signupEmailPassword(body);
     return {
@@ -42,7 +44,7 @@ exports.handler = async function http(req) {
       body: JSON.stringify(results),
     };
   } catch (error) {
-    console.log(error);
+    console.log('this is the val error', error.toString());
     return {
       statusCode: 500,
       headers,
