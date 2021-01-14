@@ -9,4 +9,4 @@ post /auth/refresh
 post /auth/logout
 post /auth/verify
 post /auth/signup
-post /:tenant/auth/signup
+post /auth/signup/:tenant
