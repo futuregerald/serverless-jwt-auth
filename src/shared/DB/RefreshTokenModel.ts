@@ -1,12 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
-export interface IRefreshToken extends Document {
-  token?: string;
-  group?: string;
-  user: any;
-  createdAt?: string;
-  updatedAt?: any;
-}
+import mongoose, { Schema } from 'mongoose';
+import { IRefreshToken } from '../types';
 
 const RefreshTokenSchema = new Schema<IRefreshToken>(
   {
@@ -16,9 +9,10 @@ const RefreshTokenSchema = new Schema<IRefreshToken>(
       unique: true,
       index: true,
     },
-    group: {
-      type: String,
-      default: 'global',
+    Tenant: {
+      type: Schema.Types.ObjectId,
+      ref: 'Tenant',
+      index: true,
     },
     user: {
       type: Schema.Types.ObjectId,
