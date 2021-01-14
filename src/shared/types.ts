@@ -43,5 +43,24 @@ export interface IUser extends Document {
   userMetadata?: any;
   roles?: [string];
   exp?: number;
+  tenant: string;
+  confirmed: boolean;
   isValidPassword?: (string) => Promise<boolean>;
+}
+
+export interface IRefreshToken extends Document {
+  token?: string;
+  group?: string;
+  user: any;
+  createdAt?: string;
+  updatedAt?: any;
+}
+
+export interface ITenant extends Document {
+  name?: string;
+  slug?: string;
+  admins?: [string];
+  disabled: boolean;
+  createdAt?: string;
+  updatedAt?: any;
 }

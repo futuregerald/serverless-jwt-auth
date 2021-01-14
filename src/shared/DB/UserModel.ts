@@ -9,15 +9,35 @@ const UserSchema = new Schema<IUser>(
       required: true,
       unique: true,
     },
+    tenant: {
+      type: Schema.Types.ObjectId,
+      ref: 'Tenant',
+      required: false,
+      index: true,
+    },
     password: {
       type: String,
       required: true,
     },
     appMetadata: {
       type: Object,
+      default: {},
     },
     userMetadata: {
       type: Object,
+      default: {},
+    },
+    confirmed: {
+      type: Boolean,
+      default: false,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
     roles: {
       type: Array,
