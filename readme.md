@@ -1,6 +1,6 @@
 [![Begin build status](https://buildstatus.begin.app/meadow-wye/status.svg)](https://begin.com)
 
-A Typescript serverless authentication starter that deploys to begin.com using arc.codes and uses mongoDB as the backend.
+An opinionated Typescript serverless authentication starter that deploys to begin.com using arc.codes and uses mongoDB as the backend.
 
 ## Getting started
 
