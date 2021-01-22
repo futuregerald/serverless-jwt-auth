@@ -7,7 +7,7 @@ import validatePayload from './validator';
 
 const headers = {
   'cache-control': 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
-  'content-type': 'application/json; charset=utf8',
+  'content-type': 'application/json',
 };
 
 export const handler = async function http(req) {
