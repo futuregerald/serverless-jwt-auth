@@ -15,7 +15,6 @@ const getExpDate = (options?: expiryDateOptions) => {
     expiryOptions = { hours: 1 };
   }
   const expiryDate = add(new Date(), expiryOptions);
-  console.log('expiryDate', Math.floor(expiryDate.getTime() / 1000));
   return Math.floor(expiryDate.getTime() / 1000);
 };
 
