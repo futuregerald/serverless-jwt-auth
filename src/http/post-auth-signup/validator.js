@@ -1,4 +1,4 @@
-import { Validator } from 'jsonschema';
+const { Validator } = require('jsonschema');
 
 const v = new Validator();
 
@@ -24,4 +24,4 @@ const validatePayload = body => {
   }
 };
 
-export default validatePayload;
+module.exports = validatePayload;

@@ -3,20 +3,16 @@
   "version": "0.0.0",
   "description": "A simple Begin app with the minimum necessary file structure",
   "scripts": {
-    "build": "npx tsc && npx arc hydrate",
-    "start": "npm run build && npx arc sandbox",
-    "deploy": "npm run build && npx arc deploy"
+    "start": "npx arc sandbox",
+    "deploy": "npx arc deploy"
   },
   "devDependencies": {
-    "@architect/sandbox": "^3.3",
-    "@types/node": "^14.14.20"
+    "@architect/sandbox": "^3.3"
   },
   "dependencies": {
     "@architect/architect": "^8.4.6",
     "@architect/functions": "^3.13.9",
     "@types/date-fns": "^2.6.0",
-    "@types/jsonwebtoken": "^8.5.0",
-    "@types/mongoose": "^5.10.3",
     "argon2": "^0.27.1",
     "date-fns": "^2.16.1",
     "jsonschema": "^1.4.0",
