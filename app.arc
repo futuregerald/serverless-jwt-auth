@@ -3,9 +3,6 @@ jwt-auth-app
 
 @static
 
-@events
-account-new-signup
-
 @http
 post /auth/login
 post /auth/refresh
