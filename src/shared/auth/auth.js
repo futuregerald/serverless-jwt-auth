@@ -1,18 +1,11 @@
-import { userSerializer } from '../serializers/user';
-import UserModel from '../DB/UserModel';
-import { generateUserJWT, generateAndSaveRefreshToken } from './jwt';
-import {
-  signupEmailPasswordFunc,
-  signupReturn,
-  generateJWTOptions,
-} from '../types';
+const { userSerializer } = require('../serializers/user');
+const UserModel = require('../DB/UserModel');
+
+const { generateUserJWT, generateAndSaveRefreshToken } = require('./jwt');
 
 const signingSecret = process.env.SIGNING_SECRET;
 
-export const signupEmailPassword = async ({
-  email,
-  password,
-}: signupEmailPasswordFunc): Promise<signupReturn> => {
+exports.signupEmailPassword = async ({ email, password }) => {
   try {
     if (!signingSecret) {
       throw new Error('JWT Signing Secret Not Found');
@@ -20,7 +13,7 @@ export const signupEmailPassword = async ({
     const user = await UserModel.create({ email, password });
     const userObj = user;
 
-    const userJwtOptions: generateJWTOptions = {
+    const userJwtOptions = {
       _id: userObj._id,
       email: userObj.email,
       appMetadata: userObj.appMetadata,

@@ -1,8 +1,9 @@
-import mongoose, { Schema } from 'mongoose';
-import { uid } from 'rand-token';
-import { IVerificationToken } from '../types';
+const { uid } = require('rand-token');
+const mongoose = require('mongoose');
 
-const VerificationTokenSchema = new Schema<IVerificationToken>(
+const { Schema } = mongoose;
+
+const VerificationTokenSchema = new Schema(
   {
     token: {
       type: String,
@@ -20,8 +21,8 @@ const VerificationTokenSchema = new Schema<IVerificationToken>(
   { timestamps: true }
 );
 
-const VerificationTokenModel = mongoose.model<IVerificationToken>(
+const VerificationTokenModel = mongoose.model(
   'VerificationToken',
   VerificationTokenSchema
 );
-export default VerificationTokenModel;
+module.exports = VerificationTokenModel;

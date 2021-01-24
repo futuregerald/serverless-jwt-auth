@@ -1,15 +1,9 @@
-import jwt from 'jsonwebtoken';
-import add from 'date-fns/add';
-import {
-  generateJWTOptions,
-  generateRefreshJWTOptions,
-  expiryDateOptions,
-  IUser,
-} from '../types';
-import RefreshTokenModel from '../DB/RefreshTokenModel';
+const add = require('date-fns/add');
+const jwt = require('jsonwebtoken');
+const RefreshTokenModel = require('../DB/RefreshTokenModel');
 
 // const getExpDate = () => Math.floor(Date.now() / 1000) + 60 * 60;
-const getExpDate = (options?: expiryDateOptions) => {
+const getExpDate = options => {
   let expiryOptions = options;
   if (!expiryOptions) {
     expiryOptions = { hours: 1 };
@@ -18,10 +12,7 @@ const getExpDate = (options?: expiryDateOptions) => {
   return Math.floor(expiryDate.getTime() / 1000);
 };
 
-export const generateUserJWT = (
-  signingSecret: string,
-  options: generateJWTOptions
-): string =>
+const generateUserJWT = (signingSecret, options) =>
   jwt.sign(
     {
       exp: options.exp || getExpDate(),
@@ -38,10 +29,7 @@ export const generateUserJWT = (
     signingSecret
   );
 
-export const generateRefreshJWT = (
-  signingSecret: string,
-  options: generateRefreshJWTOptions
-): string =>
+const generateRefreshJWT = (signingSecret, options) =>
   jwt.sign(
     {
       exp: options.exp || getExpDate({ months: 1 }),
@@ -52,11 +40,7 @@ export const generateRefreshJWT = (
     signingSecret
   );
 
-export const generateAndSaveRefreshToken = async (
-  signingSecret: string,
-  options: generateRefreshJWTOptions,
-  user: IUser
-): Promise<string> => {
+const generateAndSaveRefreshToken = async (signingSecret, options, user) => {
   try {
     const token = generateRefreshJWT(signingSecret, options);
     await RefreshTokenModel.create({ token, user });
@@ -65,3 +49,6 @@ export const generateAndSaveRefreshToken = async (
     return Promise.reject(error);
   }
 };
+exports.generateAndSaveRefreshToken = generateAndSaveRefreshToken;
+exports.generateRefreshJWT = generateRefreshJWT;
+exports.generateUserJWT = generateUserJWT;

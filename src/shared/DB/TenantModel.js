@@ -1,7 +1,8 @@
-import mongoose, { Schema } from 'mongoose';
-import { ITenant } from '../types';
+const mongoose = require('mongoose');
 
-const TenantSchema = new Schema<ITenant>(
+const { Schema } = mongoose;
+
+const TenantSchema = new Schema(
   {
     name: {
       type: String,
@@ -29,5 +30,5 @@ const TenantSchema = new Schema<ITenant>(
 );
 TenantSchema.index({ createdAt: 1 }, { expireAfterSeconds: '1m' });
 
-const TenantModel = mongoose.model<ITenant>('Tenant', TenantSchema);
-export default TenantModel;
+const TenantModel = mongoose.model('Tenant', TenantSchema);
+module.exports = TenantModel;

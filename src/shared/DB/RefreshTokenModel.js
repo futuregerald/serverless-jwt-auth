@@ -1,7 +1,8 @@
-import mongoose, { Schema } from 'mongoose';
-import { IRefreshToken } from '../types';
+const mongoose = require('mongoose');
 
-const RefreshTokenSchema = new Schema<IRefreshToken>(
+const { Schema } = mongoose;
+
+const RefreshTokenSchema = new Schema(
   {
     token: {
       type: String,
@@ -25,8 +26,5 @@ const RefreshTokenSchema = new Schema<IRefreshToken>(
   { timestamps: true }
 );
 
-const RefreshTokenModel = mongoose.model<IRefreshToken>(
-  'RefreshToken',
-  RefreshTokenSchema
-);
-export default RefreshTokenModel;
+const RefreshTokenModel = mongoose.model('RefreshToken', RefreshTokenSchema);
+module.exports = RefreshTokenModel;

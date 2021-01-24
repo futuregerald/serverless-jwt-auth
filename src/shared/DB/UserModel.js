@@ -1,8 +1,9 @@
-import mongoose, { Schema } from 'mongoose';
-import argon2 from 'argon2';
-import { IUser } from '../types';
+const mongoose = require('mongoose');
 
-const UserSchema = new Schema<IUser>(
+const { Schema } = mongoose;
+const argon2 = require('argon2');
+
+const UserSchema = new Schema(
   {
     email: {
       type: String,
@@ -46,7 +47,7 @@ const UserSchema = new Schema<IUser>(
   { timestamps: true }
 );
 
-UserSchema.pre<IUser>('save', async function(next) {
+UserSchema.pre('save', async function(next) {
   const user = this;
   if (!this.isModified('password')) {
     return next();
@@ -64,9 +65,7 @@ UserSchema.pre<IUser>('save', async function(next) {
   next();
 });
 
-UserSchema.methods.isValidPassword = async function(
-  password: string
-): Promise<boolean> {
+UserSchema.methods.isValidPassword = async function(password) {
   try {
     const user = this;
     const compare = await argon2.verify(user.password, password);
@@ -77,5 +76,5 @@ UserSchema.methods.isValidPassword = async function(
   }
 };
 
-const UserModel = mongoose.model<IUser>('User', UserSchema);
-export default UserModel;
+const UserModel = mongoose.model('User', UserSchema);
+module.exports = UserModel;
