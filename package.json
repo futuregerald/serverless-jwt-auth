@@ -10,7 +10,7 @@
     "@architect/sandbox": "^3.3"
   },
   "dependencies": {
-    "@architect/architect": "^8.4.5",
+    "@architect/architect": "^8.4.6",
     "@architect/functions": "^3.13.9",
     "@types/date-fns": "^2.6.0",
     "argon2": "^0.27.1",
