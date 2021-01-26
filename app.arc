@@ -1,8 +1,6 @@
 @app
 future-auth
 
-@static
-
 @events
 account-new-signup
 
