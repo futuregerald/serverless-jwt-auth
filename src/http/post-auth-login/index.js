@@ -12,6 +12,9 @@ const headers = {
 
 exports.handler = async function http(req) {
   try {
+    /**
+     * @type {{username: string, password: string, tenant: string}}
+     */
     const body = JSON.parse(req.body);
     validatePayload(body);
 
