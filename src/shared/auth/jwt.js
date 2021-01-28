@@ -16,6 +16,7 @@ const generateUserJWT = (signingSecret, options) =>
   jwt.sign(
     {
       exp: options.exp || getExpDate(),
+      tenant: options.tenantID || "global",
       app_metadata: {
         user_id: options._id,
         user_email: options.email,
@@ -40,6 +41,12 @@ const generateRefreshJWT = (signingSecret, options) =>
     signingSecret
   );
 
+/**
+ * 
+ * @param {string} signingSecret Secret used to sign the JWT
+ * @param {object} options Options used to generate JWT
+ * @param {object} user User contains user email, app and user metadata, roles, and tenant
+ */
 const generateAndSaveRefreshToken = async (signingSecret, options, user) => {
   try {
     const token = generateRefreshJWT(signingSecret, options);
@@ -49,6 +56,15 @@ const generateAndSaveRefreshToken = async (signingSecret, options, user) => {
     return Promise.reject(error);
   }
 };
+
+/**
+ * 
+ * @param {string} token 
+ * @return {object} decodedToken is returned. shape depends on token payload
+ */
+const decodeJWT = (token) => jwt.decode(token)
+
 exports.generateAndSaveRefreshToken = generateAndSaveRefreshToken;
 exports.generateRefreshJWT = generateRefreshJWT;
 exports.generateUserJWT = generateUserJWT;
+exports.decodeJWT = decodeJWT;
