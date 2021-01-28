@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { uid } = require('rand-token');
 
 const { Schema } = mongoose;
 
@@ -13,6 +14,12 @@ const TenantSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      index: true,
+    },
+    signingSecret: {
+      type: String,
+      required: true,
+      default: uid(12),
       index: true,
     },
     disabled: {

@@ -26,5 +26,22 @@ const RefreshTokenSchema = new Schema(
   { timestamps: true }
 );
 
+RefreshTokenSchema.pre('save', async function(next) {
+  const token = this;
+  const RefreshToken = this.constructor;
+  if (!this.isModified('token')) {
+    return next();
+  }
+
+  try {
+    await RefreshToken.deleteMany({ user: token.user });
+  } catch (err) {
+    console.log(err);
+    return Promise.reject(err);
+  }
+
+  next();
+});
+
 const RefreshTokenModel = mongoose.model('RefreshToken', RefreshTokenSchema);
 module.exports = RefreshTokenModel;
