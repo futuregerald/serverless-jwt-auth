@@ -11,11 +11,9 @@
     "jsdoc": "^3.6.6"
   },
   "dependencies": {
-    "@architect/architect": "^8.4.6",
+    "@architect/architect": "^8.4.7",
     "@architect/functions": "^3.13.9",
-    "@types/date-fns": "^2.6.0",
     "argon2": "^0.27.1",
-    "date-fns": "^2.16.1",
     "jsonschema": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
     "mailgun-js": "^0.22.0",

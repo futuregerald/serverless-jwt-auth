@@ -37,13 +37,13 @@ exports.signupEmailPassword = async ({ email, password }) => {
   }
 };
 /**
- * 
+ *
  * @param {object} authInfo Authentication infor required to login
  * @param {string} authInfo.email Email of user
  * @param {string} authInfo.password unencrypted user password
  * @param {string} authInfo.tenant Tenant ID to get signing secret
  * @return {{user: object, jwt: string, refreshToken: string}}
- *  
+ *
  */
 exports.loginEmailPassword = async ({ email, password, tenantID }) => {
   try {
@@ -90,10 +90,10 @@ exports.loginEmailPassword = async ({ email, password, tenantID }) => {
 };
 
 /**
- * 
- * @param {object} verifyObj 
+ *
+ * @param {object} verifyObj
  * @param {string} verifyObj.token User JWT token to be verified
- *  
+ *
  */
 exports.verifyAccessToken = async ({ token }) => {
   try {
