@@ -95,7 +95,7 @@ exports.loginEmailPassword = async ({ email, password, tenantID }) => {
  * @param {string} verifyObj.token User JWT token to be verified
  *
  */
-exports.verifyAccessToken = async ({ token }) => {
+exports.verifyAccessToken = async ({ token, tenantID, email, password }) => {
   try {
     let tenantSigningSecret;
     if (tenantID) {
